@@ -1,5 +1,8 @@
 # LLM Generated Text Detection
 
+- https://www.kaggle.com/competitions/llm-detect-ai-generated-text/overview
+
+
 # Train & Test Data Description:
 
 
@@ -33,7 +36,6 @@ We can leverage AI-generated data to train a classifier. However, we will have f
 2. Distribution shift of public test data set and private dataset
    1. All of the essays were written in response to one of seven essay prompts. In each prompt, the students were instructed to read one or more source texts and then write a response. This same information may or may not have been provided as input to an LLM when generating an essay.
    2. Essays from two of the prompts compose the training set; the remaining essays compose the hidden test set. Nearly all of the training set essays were written by students, with only a few generated essays given as examples. You may wish to generate more essays to use as training data.
-   3. 
 
 
 
