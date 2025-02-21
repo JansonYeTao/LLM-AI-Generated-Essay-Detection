@@ -47,7 +47,7 @@ We can leverage AI-generated data to train a classifier. However, we will have f
 
 ## Classifier Pretraining 
 
-The purpose of this step is to move the general foundation language model a bit closer to the kaggle competition domain context (detect AI & Human writing). This because language model like deberta are trained general purpose (using surrounding context to predict center word),  which will alleviate the distribution difference.
+The purpose of this step is to move the general foundation language model a bit closer to the kaggle competition domain context (detect AI & Human writing). This because language model like deberta are trained for general purpose eg. continue writing (using surrounding context to predict center word). Pretrain the classifier by leveraging transfer learning with gradient update can adopt more on the classification task, will alleviate the distribution difference.
 
 
 train_neg_list.pickle and train_pos_list.pickle are around 500,000 pairs for pretraining classifiers. Positive are human created and Negative examples are AI-Generated.
