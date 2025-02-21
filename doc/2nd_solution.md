@@ -1,3 +1,7 @@
+# Second Place Solution:
+
+Reference: https://www.kaggle.com/competitions/llm-detect-ai-generated-text/discussion/470395
+
 # LLM Generated Text Detection
 
 - https://www.kaggle.com/competitions/llm-detect-ai-generated-text/overview
