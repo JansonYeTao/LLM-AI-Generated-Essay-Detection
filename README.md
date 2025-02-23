@@ -16,3 +16,13 @@ All of the essays were written in response to one of seven essay prompts. In eac
 Essays from two of the prompts compose the training set; the remaining essays compose the hidden test set. Nearly all of the training set essays were written by students, with only a few generated essays given as examples. You may wish to generate more essays to use as training data.
 
 Please note that this is a Code Competition. The data in test_essays.csv is only dummy data to help you author your solutions. When your submission is scored, this example test data will be replaced with the full test set. There are about 9,000 essays in the test set, both student written and LLM generated.
+
+>
+> **ATTENTION**: Folks report that train and test data come from persuade corpus2 and this was shared at discussion threads:
+> - https://www.kaggle.com/competitions/llm-detect-ai-generated-text/discussion/453410
+> - https://www.kaggle.com/datasets/nbroad/persaude-corpus-2
+> - https://www.kaggle.com/code/nbroad/persuade-train-essays-analysis
+> - https://www.kaggle.com/code/nbroad/persuade-train-essays-analysis/notebook
+  
+
+<br>

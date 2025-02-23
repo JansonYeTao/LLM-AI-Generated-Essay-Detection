@@ -7,7 +7,9 @@ Reference: https://www.kaggle.com/competitions/llm-detect-ai-generated-text/disc
 
 # LLM Generated Text Detection
 
-- https://www.kaggle.com/competitions/llm-detect-ai-generated-text/overview
+https://www.kaggle.com/competitions/llm-detect-ai-generated-text/overview
+
+Author's Original code and data can be downloaded here: 
 
 
 # Train & Test Data Description:
@@ -22,12 +24,12 @@ Essays from two of the prompts compose the training set; the remaining essays co
 Please note that this is a Code Competition. The data in test_essays.csv is only dummy data to help you author your solutions. When your submission is scored, this example test data will be replaced with the full test set. There are about 9,000 essays in the test set, both student written and LLM generated.
 
 
-
-
-Folks report that train and test data come from persuade corpus2 and this was shared at discussion threads:
-- https://www.kaggle.com/datasets/nbroad/persaude-corpus-2
-- https://www.kaggle.com/code/nbroad/persuade-train-essays-analysis
-- https://www.kaggle.com/code/nbroad/persuade-train-essays-analysis/notebook
+>
+> **ATTENTION**: Folks report that train and test data come from persuade corpus2 and this was shared at discussion threads:
+> - https://www.kaggle.com/competitions/llm-detect-ai-generated-text/discussion/453410
+> - https://www.kaggle.com/datasets/nbroad/persaude-corpus-2
+> - https://www.kaggle.com/code/nbroad/persuade-train-essays-analysis
+> - https://www.kaggle.com/code/nbroad/persuade-train-essays-analysis/notebook
   
 
 <br>
@@ -53,10 +55,10 @@ We can leverage AI-generated data to train a classifier. However, we will have f
 
 ## Classifier Pretraining 
 
-The purpose of this step is to move the general foundation language model a bit closer to the kaggle competition domain context (detect AI & Human writing). This because language model like deberta are trained for general purpose eg. continue writing (using surrounding context to predict center word). Pretrain the classifier by leveraging transfer learning with gradient update can adopt more on the classification task, will alleviate the distribution difference.
+The purpose of this step is to move the general foundation language model a bit closer to the kaggle competition domain context (detect whether AI & Human writing or not). This because language model like deberta are trained for general purpose eg. continue writing (using surrounding context to predict center word). Pre-train the classifier by leveraging transfer learning with gradient update can adopt more on the classification task, will alleviate the distribution difference.
 
 
-train_neg_list.pickle and train_pos_list.pickle are around 500,000 pairs for pretraining classifiers. Positive are human created and Negative examples are AI-Generated.
+train_neg_list.pickle and train_pos_list.pickle are around 500,000 pairs for pre-training classifiers. Positive are human created and Negative examples are AI-Generated.
 
 We then train deberta on this dataset weakly (eg. one epoch) to move this language model a bit closer to the kaggle competition domain context (detect AI & Human writing)
 
@@ -86,7 +88,7 @@ In case you are interested in how to generate train_neg_list.pickle and train_po
 
 
 
-## Classifier Pretraining
+## Classifier Pre-training
 
 
 Model Selection: Use DeBERTa-v3-large or DeBERTa-large as the base model.
@@ -96,27 +98,27 @@ Training Setup:
 2. Fine-tune for one epoch, with maximum length set to around 768 tokens (or whichever your GPU can handle).
 3. Save your pretrained classifier.
 
-17/, 19/, 20/ in the code/ folder are for classifier pretraining, you need to run them first.
+17/, 19/, 20/ in the code/ folder are for classifier pre-training, you need to run them first.
 
 
 
-> Notes: This "Pretraining" approach including data generation process for pretraining is a general way of what we can do for any setting. eg. in chatbot cases, we can adapt this method in the same way to get more synthetic data. (Notice that in chat setting, input text data will be often much shorter than setting of writing essay)
+> Notes: This "Pre-training" approach including data generation process for pre-training is a general way of what we can do for any setting. eg. in chatbot cases, we can adapt this method in the same way to get more synthetic data. (Notice that in chat setting, input text data will be often much shorter than setting of writing essay)
 
 
 
 
 # Classifier Fine-tuning
 
-Move the model even closer to that specific 5 prompts that will be used in test set.
+Move the model even closer to that specific 5 prompts that will be used in test set (Persuade corpus2).
 
-> Notes: This step is particularly design for this kaggle competition which the final goal will be close the gap between the participant's generated data and competition organizer's generated data, eg. we're supposed not to know what test data and which prompt the organizer will be eventually using for evaluating.
+> !!ATTENSION!!: This step is particularly design for this kaggle competition which the final goal will be close the gap between the participant's generated data and competition organizer's generated data, eg. we're supposed not to know what test data, where the test data comes from, and what kind of prompt and data the organizer will be eventually using for evaluating.
 > 
 > However, this is quite common for kaggle competition, which people will leverage "data leakage" information to boost their score on the public & private leaderboard by reverse engineering out the extra info about test dataset.
 >
 > In real work business working setting, we often don't have that data leakage information, and instead many times we try to avoid that kind of leakage.
 
 
-## Data Generation for Finetuning (Prompt-Specific)
+## Data Generation for Fine tuning (Prompt-Specific)
 
 Move the model even closer to that specific 5 prompts that will be used in test set.
 
@@ -192,3 +194,9 @@ _ft103/ are for finetuning on train_df.csv, and train_df.csv are generated in  D
 | (6) deberta-large_v4data          | 0.9052   | 0.9283    |
 | (1)+(2)+(3) **[avg]**               | 0.9431   | 0.9818    |
 | (1)+(2)+(3)+(4)+(5)+(6) **[avg]**     | 0.9672   | 0.9834    |
+
+
+
+# TakeWay
+
+From the code, we saw the 2nd place solution does not spend too much time on modeling (just a simple mean pooling on embedding with deberta + a classifier layer). Instead, the solution provides lots of careful curation on synthetic dataset generation and the 2nd stage fine-tuning on that 5 specific prompt test data from Persuade corpus (We know its Persuade corpus bc data leakage) leads to a further significant increase on model performance on hidden test data.
