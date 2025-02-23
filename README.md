@@ -26,3 +26,11 @@ Please note that this is a Code Competition. The data in test_essays.csv is only
   
 
 <br>
+
+https://www.kaggle.com/competitions/llm-detect-ai-generated-text/discussion/453410
+
+This leaderboard is calculated with approximately 46% of the test data. The final results will be based on the other 54%, so the final standings may be different.
+
+Then it all boils down to the method of split between public and private LB test sets. If it was random split. Then current scores can pretty much be the final result. If it was not random, and there was some other heuristic used to split the test set - we might be in for a surprise :)
+
+And indeed, there may well be a shakeup. There are two types of shakeup; one is a score shakeup where the Public data and the Private data distributions are very different, and people who have actively fitted to the Public score will suffer. However, there is also a positional shakeup (which is what I think will happen here): The Public and Private splits are statistically similar, but eventually all of the LB scores become compacted in a very narrow range (say for example everyone has a Public score of 0.95 +/- 0.01) then the slightest variation in the last significant figure can make a huge difference to ones final standing.

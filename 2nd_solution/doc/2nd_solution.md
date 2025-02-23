@@ -163,6 +163,10 @@ Important thing is that student's essays are written in response to some context
 
 Basically the generated essay should be not only rooted in the given prompt, but also be rooted in given context questions. This is to make sure when we compare only on the text which is written by Human or AI instead of other outside factors.
 
+And finally we will have: 
+- ftdata (train_df.csv): the one we are talking about above. 5 prompts only. Around 9,000 negatives VS 18,000 positives.
+- v4data (train_v4_drcat_01.csv): gathered by other competitors. All 15 prompts plus a little others. Around 28,000 negatives VS 45,000 positives. Can be downloaded here: https://www.kaggle.com/datasets/thedrcat/daigt-v4-train-dataset
+
 
 
 ## Classifier Finetuning (Prompt-Specific)
@@ -173,16 +177,32 @@ Run another epoch or so of training to adapt the classifier specifically to the 
 Also consider external datasets (like “v4data” or other shared Kaggle sets) to broaden coverage if available.
 
 
-_ft1/ are for finetuning on train_v4_drcat_01.csv and train_v4_drcat_01.csv can be downloaded from https://www.kaggle.com/datasets/thedrcat/daigt-v4-train-dataset
-
-
-_ft103/ are for finetuning on train_df.csv, and train_df.csv are generated in  Data Generation for Finetuning (Prompt-Specific) Steps`
-
-
+- _ft1/ are for finetuning on train_v4_drcat_01.csv and train_v4_drcat_01.csv can be downloaded from https://www.kaggle.com/datasets/thedrcat/daigt-v4-train-dataset
+- _ft103/ are for finetuning on train_df.csv, and train_df.csv are generated in Data Generation for Finetuning (Prompt-Specific) Steps`
 
 
 
 # Model Inference:
+
+Three pre-trained models
+- deberta-v3-large1
+- deberta-v3-large2
+- deberta-large
+
+
+Two fine-tuning data:
+- train_df.csv (ftdata gathered by generating data)
+- train_v4_drcat_01 (v4data gathered from other competitors)
+
+
+So for each model, we fine-tune the data, then we will have 6 models in total.
+- deberta-v3-large1_ftdata 
+- deberta-v3-large2_ftdata
+- deberta-large_ftdata
+- deberta-v3-large1_v4data
+- deberta-v3-large2_v4data 
+- deberta-large_v4data 
+
 
 | Model                             | Public LB| Private LB|
 |-----------------------------------|----------|-----------|
