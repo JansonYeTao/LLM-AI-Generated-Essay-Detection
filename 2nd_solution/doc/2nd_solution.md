@@ -10,6 +10,8 @@ Reference: https://www.kaggle.com/competitions/llm-detect-ai-generated-text/disc
 https://www.kaggle.com/competitions/llm-detect-ai-generated-text/overview
 
 Author's Original code and data can be downloaded here: 
+- Link to inference code: https://www.kaggle.com/code/wowfattie/daigt-2nd-place
+- Link to training code and data: https://www.kaggle.com/datasets/wowfattie/daigtpretraindata
 
 
 # Train & Test Data Description:
@@ -25,7 +27,7 @@ Please note that this is a Code Competition. The data in test_essays.csv is only
 
 
 >
-> **ATTENTION**: Folks report that train and test data come from persuade corpus2 and this was shared at discussion threads:
+> **ATTENTION**: Folks report that train and test data come from **persuade corpus2** and this was shared at discussion threads:
 > - https://www.kaggle.com/competitions/llm-detect-ai-generated-text/discussion/453410
 > - https://www.kaggle.com/datasets/nbroad/persaude-corpus-2
 > - https://www.kaggle.com/code/nbroad/persuade-train-essays-analysis
@@ -185,8 +187,8 @@ Also consider external datasets (like “v4data” or other shared Kaggle sets) 
 # Model Inference:
 
 Three pre-trained models
-- deberta-v3-large1
-- deberta-v3-large2
+- deberta-v3-large1 (seed=1001)
+- deberta-v3-large2 (seed=4001)
 - deberta-large
 
 
